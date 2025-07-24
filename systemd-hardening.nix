@@ -527,7 +527,17 @@ systemd.services.podman = {
     wantedBy = [ "multi-user.target" ];
 };
 
-
+systemd.services.wpa_supplicant = {
+    serviceConfig = {
+      ProtectSystem = "full";
+      ProtectHome = "yes";
+      PrivateTmp = true;
+      NoNewPrivileges = true;
+      CapabilityBoundingSet = [ "CAP_NET_ADMIN" "CAP_NET_RAW" ];
+      RestrictRealtime = true;
+      SystemCallFilter = "~@mount @reboot @swap";
+   };
+};
 
 
 }
